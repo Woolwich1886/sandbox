@@ -1,0 +1,7 @@
+<div class="wrapper" (click)="onClick()" mat-ripple matRippleColor="$primary">
+    {{user?.name}}
+    <div class="content">
+        <span class="text-accent">{{lastMessage?.author?.id !== user?.id ? 'Вы: ' : ''}}</span>{{lastMessage?.content}}
+    </div>
+    <span class="text-accent">{{lastMessage?.sendOn|date}}</span>
+</div>

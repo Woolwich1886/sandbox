@@ -1,0 +1,35 @@
+mat-card {
+    margin: 8px;
+    padding: 8px;
+    word-break: break-all;
+}
+
+mat-card-content {
+    padding: 8px
+}
+
+@media (min-width: 800px) {
+    :host {
+        max-width: 400px;
+    }
+}
+
+@media (min-width: 1600px) {
+    :host {
+        max-width: 800px;
+    }
+}
+
+.wrapper {
+    background-color: white;
+    display: flex;
+}
+
+.content {
+    flex-shrink: 1;
+}
+
+mat-card-footer {
+    display: flex;
+    flex-direction: row-reverse;
+}

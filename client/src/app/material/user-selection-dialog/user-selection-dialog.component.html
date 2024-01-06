@@ -1,0 +1,6 @@
+<div class="dialog">
+    <h3>Выберите пользователя</h3>
+    @for (user of data; track $index) {
+    <sb-card [title]="user.name" actionLabel="Выбрать" (action)="select(user.id)"></sb-card>
+    }
+</div>

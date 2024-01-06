@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+
+:host {
+    :hover {
+        cursor: pointer;
+    }
+
+    background-color: white;
+}
+
+:host.active {
+    background-color: #1d8a7a;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+.content {
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    text-overflow: ellipsis;
+}

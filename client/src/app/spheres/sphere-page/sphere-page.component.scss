@@ -1,0 +1,33 @@
+@use '/src/assets/scss/palette.scss' as _;
+
+@mixin block {
+    background: _.$light;
+    border: solid _.$dark-blue 2px;
+    box-shadow: 4px 4px 8px 1px _.$middle-blue;
+    border-radius: 8px;
+    padding: 8px;
+    min-width: 0;
+}
+
+:host {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 50px;
+    margin: 8px;
+}
+
+.control-block {
+    @include block();
+}
+
+.main-block {
+    @include block();
+    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.result-block {
+    @include block();
+}

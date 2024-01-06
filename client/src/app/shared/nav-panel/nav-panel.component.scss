@@ -1,0 +1,8 @@
+@use '/src/assets/scss/palette.scss' as _;
+
+:host {
+    display: block;
+    color: _.$dark-blue;
+    background-color: _.$dark-blue;
+    min-height: 48px;
+}
