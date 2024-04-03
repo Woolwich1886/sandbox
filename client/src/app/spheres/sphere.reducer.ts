@@ -1,5 +1,4 @@
 import { createReducer, on } from "@ngrx/store";
-import { Queue } from "./queue";
 import { createSphere } from "./sphere-page.service";
 import { SphereAction } from "./sphere.action";
 import { SphereModel } from "./sphere.model";
@@ -16,7 +15,6 @@ export const initialState: SpherePageState = {
     violetCount: 0,
     whiteCount: 0,
     lastRedNumber: undefined,
-    lastThree: new Queue(3),
 };
 
 export const spherePageReducer = createReducer(
@@ -57,7 +55,6 @@ function addSphere(state: SpherePageState, payload: { sphere: SphereModel; }): S
             newState.blueCount++;
             if (sphere.number > (newState.lastRedNumber ?? 10)) {
                 const violet: SphereModel = createSphere('violet');
-                newState.lastThree.add(violet);
                 newState.violetCount++;
                 newState = { ...newState, spheres: [...newState.spheres, violet] };
             }
@@ -65,24 +62,10 @@ function addSphere(state: SpherePageState, payload: { sphere: SphereModel; }): S
         case "green":
             const anotherGreen: SphereModel = createSphere('green');
             newState.greenCount += 2;
-            newState.lastThree.add(anotherGreen);
             newState = { ...newState, spheres: [...newState.spheres, anotherGreen] };
             break;
         default:
             throw new Error('Unsupported sphere color in reducer.');
-    }
-    const lastThree = newState.lastThree;
-    if (lastThree.getLength() === 3) {
-        const uniqueColorsCount = new Set(lastThree.getQueue().map(arr => arr.color)).size;
-        if (uniqueColorsCount === 1) {
-            const white = createSphere('white');
-            newState.spheres.push(white);
-        } else if (uniqueColorsCount === 3) {
-            const combined = lastThree.getQueue().reduce(
-                (prev, curr) => ({ color: curr.color, number: Math.max(prev.number, curr.number) } satisfies SphereModel)
-            );
-            newState.spheres.push(combined);
-        }
     }
     return newState;
 }

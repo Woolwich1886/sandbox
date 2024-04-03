@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { SphereModel } from "./sphere.model";
-import { Queue } from "./queue";
 
 export const SphereFeature = 'spheres;';
 
@@ -19,7 +18,6 @@ export interface SpherePageState {
     violetCount: number;
     whiteCount: number;
     lastRedNumber: number | undefined;
-    lastThree: Queue<SphereModel>;
 }
 
 export const selectFeatureState = createFeatureSelector<SphereFeatureState>(SphereFeature);
