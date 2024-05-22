@@ -1,15 +1,15 @@
-@use '@angular/material' as mat;
+@use '../../../assets/scss/palette.scss' as _;
 
 :host {
     :hover {
         cursor: pointer;
     }
 
-    background-color: white;
+    background-color: _.$mint-light;
 }
 
 :host.active {
-    background-color: #1d8a7a;
+    background-color: _.$mint-middle;
 }
 
 .wrapper {

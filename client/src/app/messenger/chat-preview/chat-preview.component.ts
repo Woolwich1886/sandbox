@@ -24,9 +24,9 @@ export class ChatPreviewComponent {
   lastMessage?: Message;
 
   @Output()
-  select: EventEmitter<void> = new EventEmitter();
+  choose: EventEmitter<void> = new EventEmitter();
 
   onClick(): void {
-    this.select.emit();
+    this.choose.emit();
   }
 }

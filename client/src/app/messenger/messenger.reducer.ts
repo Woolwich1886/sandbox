@@ -1,8 +1,10 @@
 import { createReducer, on } from "@ngrx/store";
+import { Action } from "../utils/type-utils";
+import { LoadMessage, MessengerActionType, SelectChat, SetChatList, SetCurrentUser, SetMessagesList, UpdateChatList } from "./messenger.action";
 import { MessengerState } from "./messenger.state";
-import { LoadMessage, SelectChat, SendMessage, SetChatList, SetCurrentUser, SetMessagesList, UpdateChatList } from "./messenger.action";
-import { UserInfo } from "./model/user-info.model";
 import { ChatPreviewInfo } from "./model/chat-preview-info.model";
+import { Message } from "./model/message.model";
+import { UserInfo } from "./model/user-info.model";
 
 export const initialState: MessengerState = {
     currentUser: {} as UserInfo,
@@ -14,7 +16,6 @@ export const initialState: MessengerState = {
 export const messengerReducer = createReducer(
     initialState,
     on(SetCurrentUser, setCurrentUser),
-    on(SendMessage, sendMessage),
     on(LoadMessage, loadMessage),
     on(SetChatList, setChatList),
     on(SelectChat, selectChat),
@@ -22,41 +23,30 @@ export const messengerReducer = createReducer(
     on(SetMessagesList, setMessagesList)
 );
 
-function setCurrentUser(state: MessengerState, action: any): MessengerState {
-    //console.log(action);
-    return { ...state, currentUser: action.payload };
+function setCurrentUser(state: MessengerState, action: Action<MessengerActionType.SetCurrentUser, UserInfo>): MessengerState {
+    return { ...state, currentUser: action.payload, selectedChatId: undefined };
 }
 
-function setChatList(state: MessengerState, action: any): MessengerState {
-    //console.log(action);
+function setChatList(state: MessengerState, action: Action<MessengerActionType.SetChatList, ChatPreviewInfo[]>): MessengerState {
     return { ...state, chatList: action.payload };
 }
 
-function setMessagesList(state: MessengerState, action: any): MessengerState {
-    console.log(action);
+function setMessagesList(state: MessengerState, action: Action<MessengerActionType.SetMessagesList, Message[]>): MessengerState {
     return { ...state, messages: action.payload };
 }
 
-function sendMessage(state: MessengerState, action: any): MessengerState {
-    return { ...state };
-}
-
-function loadMessage(state: MessengerState, action: any): MessengerState {
-    console.log(action);
+function loadMessage(state: MessengerState, action: Action<MessengerActionType.LoadMessage, Message>): MessengerState {
     const newMessages = [...state.messages, action.payload];
     return { ...state, messages: newMessages };
 }
 
-function selectChat(state: MessengerState, action: any): MessengerState {
-    console.log(action);
+function selectChat(state: MessengerState, action: Action<MessengerActionType.SelectChat, number>): MessengerState {
     const chatId = Number(action.payload);
     const list = state.chatList.map(info => ({ ...info, isActive: info.id === chatId }));
-    console.log('костыль с number()');
     return { ...state, chatList: list, selectedChatId: Number(action.payload) };
 }
 
-function updateChatList(state: MessengerState, action: any): MessengerState {
-    console.log(action);
+function updateChatList(state: MessengerState, action: Action<MessengerActionType.UpdateChatList, ChatPreviewInfo>): MessengerState {
     const newList = state.chatList.filter(c => c.id !== action.payload.id);
     const chat: ChatPreviewInfo = { ...action.payload, isActive: state.selectedChatId === action.payload.id };
     newList.unshift(chat);

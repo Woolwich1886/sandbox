@@ -17,20 +17,29 @@ import java.time.LocalDateTime;
 @Table(name = "message")
 public class Message extends BaseEntity {
 
+    /**
+     * Содержание
+     */
     @Column(name = "content", length = 1000)
     private String content;
 
+    /**
+     * Автор
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "app_user_id")
     private User author;
 
+    /**
+     * Чат
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
+    /**
+     * Дата отправки
+     */
     @Column(name = "send_on", nullable = false)
     private LocalDateTime sendOn;
-
-    @Column(name = "is_read", nullable = false)
-    private boolean isRead;
 }

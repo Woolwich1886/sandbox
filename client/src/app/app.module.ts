@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { SpheresModule } from './spheres/spheres.module';
-import { SharedModule } from './shared/shared.module';
-import { StoreModule } from '@ngrx/store';
-import { MainPageComponent } from './main-page/main-page/main-page.component';
+import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MaterialModule } from './material/material.module';
-import { MessengerModule } from './messenger/messenger.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { MainPageComponent } from './main-page/main-page/main-page.component';
+import { MaterialModule } from './material/material.module';
+import { SharedModule } from './shared/shared.module';
+import { SpheresModule } from './spheres/spheres.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +24,8 @@ import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
     AppRoutingModule,
     SpheresModule,
     SharedModule,
+    HttpClientModule,
     MaterialModule,
-    MessengerModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

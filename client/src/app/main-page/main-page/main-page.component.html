@@ -1,3 +1,4 @@
 @for (nc of navCards; track $index) {
-<sb-card [title]="nc.label" actionLabel="Перейти" (action)="nc.callback()"></sb-card>
+<sb-card [title]="nc.label" [description]="nc.description" actionLabel="Перейти"
+    (action)="nc.navigateCallback()"></sb-card>
 }

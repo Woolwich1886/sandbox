@@ -1,33 +1,67 @@
-@use '/src/assets/scss/palette.scss' as _;
-
-@mixin block {
-    background: _.$light;
-    border: solid _.$dark-blue 2px;
-    box-shadow: 4px 4px 8px 1px _.$middle-blue;
-    border-radius: 8px;
-    padding: 8px;
-    min-width: 0;
-}
+@use '../../../assets/scss/palette.scss' as _;
+@use '@angular/material' as mat;
 
 :host {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    gap: 50px;
-    margin: 8px;
-}
-
-.control-block {
-    @include block();
-}
-
-.main-block {
-    @include block();
-    height: 600px;
     display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
+    height: 100%;
 }
 
-.result-block {
-    @include block();
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    margin: 2px;
+    min-width: 200px;
+}
+
+mat-slide-toggle {
+    margin: 4px;
+}
+
+@mixin container() {
+    border: solid _.$blue-middle 2px;
+    box-shadow: 2px 2px 4px 2px _.$blue-light;
+    border-radius: 4px;
+    padding: 8px;
+    min-width: 300px;
+    overflow: auto;
+    height: 375px;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 40px;
+    flex: 1;
+    margin: 2px;
+
+    .spheres-container {
+        @include container();
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+    }
+
+    .log-container {
+        @include container();
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    sb-sphere-chart {
+        @include container();
+        grid-column: 1/3;
+        grid-row: 2;
+    }
+}
+
+mat-divider {
+    border: solid 2px _.$blue-middle;
+}
+
+button {
+    display: flex;
+    justify-content: flex-start;
 }

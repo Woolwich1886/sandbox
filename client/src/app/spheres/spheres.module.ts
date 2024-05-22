@@ -1,10 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SpherePageComponent } from './sphere-page/sphere-page.component';
-import { SphereComponent } from './sphere/sphere.component';
+import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
-import { initialState, spherePageReducer } from './sphere.reducer';
-import { SphereFeature, SphereFeatureState, SpherePageState } from './sphere.state';
+import { SpherePageComponent } from './sphere-page/sphere-page.component';
+import { spherePageReducer } from './sphere.reducer';
+import { SphereFeature, SphereFeatureState } from './sphere.state';
+import { SphereComponent } from './sphere/sphere.component';
+import { SpheresRoutingModule } from './spheres-routing.module';
+import { MaterialModule } from '../material/material.module';
+import { SphereHelpDialogComponent } from './sphere-help-dialog/sphere-help-dialog.component';
+import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
+import { SphereChartComponent } from './sphere-chart/sphere-chart.component';
 
 
 
@@ -12,13 +17,21 @@ import { SphereFeature, SphereFeatureState, SpherePageState } from './sphere.sta
   declarations: [
     SpherePageComponent,
     SphereComponent,
+    SphereHelpDialogComponent,
+    SphereChartComponent,
   ],
   imports: [
+    SpheresRoutingModule,
     CommonModule,
     StoreModule.forFeature<SphereFeatureState>(SphereFeature, { spherePageState: spherePageReducer }),
+    MaterialModule,
+    NgxEchartsDirective,
   ],
   exports: [
     SpherePageComponent,
-  ]
+  ],
+  providers: [
+    provideEcharts(),
+  ],
 })
 export class SpheresModule { }

@@ -12,7 +12,9 @@ import lombok.Setter;
 @Table(name = "app_user")
 public class User extends BaseEntity {
 
+    /**
+     * Имя пользователя
+     */
     @Column(name = "name", nullable = false, length = 20)
     private String name;
-
 }

@@ -5,7 +5,7 @@ import com.sandbox.server.data.MessageRepository;
 import com.sandbox.server.entity.Chat;
 import com.sandbox.server.entity.Message;
 import com.sandbox.server.entity.User;
-import com.sandbox.server.socket.dto.MessageDTO;
+import com.sandbox.server.rest.dto.MessageDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +34,6 @@ public class ChatCommandService {
         message.setContent(content);
         message.setSendOn(LocalDateTime.now());
         message.setAuthor(author);
-        message.setRead(false);
         return messageRepository.save(message);
     }
 }

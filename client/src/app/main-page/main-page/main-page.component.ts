@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { MainPageService } from '../main-page.service';
 import { NavCard } from '../nav-card.model';
 

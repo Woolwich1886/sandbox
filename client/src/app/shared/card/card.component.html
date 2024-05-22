@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-header>
+        <h3>{{title}}</h3>
+    </mat-card-header>
+    @if (description) {
+    <mat-card-content>{{description}}</mat-card-content>
+    <mat-divider></mat-divider>
+    }
+    <mat-card-actions>
+        <button mat-stroked-button color="accent" (click)="execute()">{{actionLabel}}</button>
+    </mat-card-actions>
+</mat-card>

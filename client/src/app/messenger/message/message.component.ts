@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, Output } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'sb-message',

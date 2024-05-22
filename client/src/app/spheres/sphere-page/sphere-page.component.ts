@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SphereModel } from '../sphere.model';
-import { Observable, distinctUntilChanged, filter, interval, of, switchMap, tap, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SpherePageService } from '../sphere-page.service';
+import { AdvancedSphereColor, SphereColor, SphereModel } from '../sphere.model';
 
 @Component({
   selector: 'sb-sphere-page',
@@ -15,19 +15,19 @@ import { SpherePageService } from '../sphere-page.service';
 export class SpherePageComponent {
 
   readonly sphereList$: Observable<SphereModel[]>;
-  readonly redCount$: Observable<number>;
-  readonly blueCount$: Observable<number>;
-  readonly greenCount$: Observable<number>;
-  readonly violetCount$: Observable<number>;
-  readonly whiteCount$: Observable<number>;
+  readonly colorCount$: Observable<Record<AdvancedSphereColor, number>>;
+  readonly log$: Observable<string[]>;
+  readonly isColorOn: Record<SphereColor, Observable<boolean>>;
+  isInfoOpen = false;
 
   constructor(public service: SpherePageService) {
     this.sphereList$ = this.service.getSpheres();
-    this.redCount$ = this.service.getColorCount('red');
-    this.blueCount$ = this.service.getColorCount('blue');
-    this.greenCount$ = this.service.getColorCount('green');
-    this.violetCount$ = this.service.getColorCount('violet');
-    this.whiteCount$ = this.service.getColorCount('white');
+    this.colorCount$ = this.service.getColorCount();
+    const colors: SphereColor[] = ['red', 'blue', 'green'];
+    this.isColorOn = colors.reduce((rec, color) => (
+      rec[color] = this.service.getColorIsOn(color), rec
+    ), {} as Record<SphereColor, Observable<boolean>>);
+    this.log$ = this.service.getLog();
   }
 
 }

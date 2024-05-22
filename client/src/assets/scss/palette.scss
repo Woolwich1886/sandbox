@@ -1,53 +1,9 @@
-$mint: #145e51;
-$light: #F9F7F7;
-$light-blue: #DBE2EF;
-$middle-blue: #3F72AF;
-$dark-blue: #112D4E;
+@use '../../styles.scss' as _;
+@use '@angular/material' as mat;
 
-$mint-palette: (
-    50: #e0f0ef,
-    100: #b1dbd5,
-    200: #80c4bb,
-    300: #50aca0,
-    400: #319b8d,
-    500: #1d8a7a,
-    600: #1a7d6e,
-    700: #176e5f,
-    800: #145e50,
-    900: #0f4236,
-    contrast: (50: #e2f6fe,
-        100: #b6e7fd,
-        200: #86d7fb,
-        300: #59c7f8,
-        400: #3cbbf7,
-        500: #2aaef6,
-        600: #26a0e6,
-        700: #228dd2,
-        800: #1f7cbe,
-        900: #195c9c,
-    )
-);
-
-$blue-palette: (
-    50: #e2f6fe,
-    100: #b6e7fd,
-    200: #86d7fb,
-    300: #59c7f8,
-    400: #3cbbf7,
-    500: #2aaef6,
-    600: #26a0e6,
-    700: #228dd2,
-    800: #1f7cbe,
-    900: #195c9c,
-    contrast: (50: #e0f0ef,
-        100: #b1dbd5,
-        200: #80c4bb,
-        300: #50aca0,
-        400: #319b8d,
-        500: #1d8a7a,
-        600: #1a7d6e,
-        700: #176e5f,
-        800: #145e50,
-        900: #0f4236,
-    )
-);
+$mint-light: mat.get-theme-color(_.$theme, accent, 100);
+$mint-middle: mat.get-theme-color(_.$theme, accent, 500);
+$mint-dark: mat.get-theme-color(_.$theme, accent, 900);
+$blue-light: mat.get-theme-color(_.$theme, primary, 100);
+$blue-middle: mat.get-theme-color(_.$theme, primary, 500);
+$blue-dark: mat.get-theme-color(_.$theme, primary, 900);

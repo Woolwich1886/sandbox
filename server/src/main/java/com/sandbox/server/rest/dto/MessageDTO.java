@@ -1,7 +1,6 @@
-package com.sandbox.server.socket.dto;
+package com.sandbox.server.rest.dto;
 
 import com.sandbox.server.entity.Message;
-import com.sandbox.server.rest.dto.UserDTO;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

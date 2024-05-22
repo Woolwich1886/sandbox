@@ -1,0 +1,7 @@
+<mat-form-field>
+    <textarea #input matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="20"
+        placeholder="Напечатай текст и нажми Enter!" (keydown.enter)="onEnterSubmit($event)"></textarea>
+    <button matSuffix mat-icon-button color="accent" (click)="onSubmit()">
+        <mat-icon svgIcon="send"></mat-icon>
+    </button>
+</mat-form-field>

@@ -1,7 +1,6 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
-@use 'assets/scss/palette.scss' as palette;
 @use '/src/assets/scss/font.scss';
 // Plus imports for other components in your app.
 
@@ -13,15 +12,62 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$sandbox-primary: mat.define-palette(palette.$mint-palette);
-$sandbox-accent: mat.define-palette(palette.$blue-palette);
+$mint-palette: (
+  50: #e0f0ef,
+  100: #b1dbd5,
+  200: #80c4bb,
+  300: #50aca0,
+  400: #319b8d,
+  500: #1d8a7a,
+  600: #1a7d6e,
+  700: #176e5f,
+  800: #145e50,
+  900: #0f4236,
+  contrast: (50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+  )
+);
+
+$blue-palette: (
+  50: #e3f3ff,
+  100: #bbe0ff,
+  200: #8dcdff,
+  300: #58b9ff,
+  400: #27a9ff,
+  500: #0099ff,
+  600: #008aff,
+  700: #1477f8,
+  800: #1d64e6,
+  900: #2442c6,
+  contrast: (50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+  )
+);
+$sandbox-primary: mat.define-palette($blue-palette);
+$sandbox-accent: mat.define-palette($mint-palette);
 
 // The warn palette is optional (defaults to red).
 $sandbox-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$sandbox-theme: mat.define-light-theme((color: (primary: $sandbox-primary,
+$theme: mat.define-light-theme((color: (primary: $sandbox-primary,
         accent: $sandbox-accent,
         warn: $sandbox-warn,
       )));
@@ -29,16 +75,12 @@ $sandbox-theme: mat.define-light-theme((color: (primary: $sandbox-primary,
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($sandbox-theme);
+@include mat.all-component-themes($theme);
 
 /* You can add global styles to this file, and also import other style files */
-/* :host {
-  height: 100%;
-} */
-
 body {
   margin: 0;
-  background: palette.$light-blue;
+  background: mat.get-theme-color($theme, primary, 50);
   // подмена на загруженные google шрифты
   font-family: Onest, sans-serif;
 }

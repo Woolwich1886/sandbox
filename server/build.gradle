@@ -20,6 +20,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation "io.jsonwebtoken:jjwt-api:${Versions.jsonWebToken}"
+    runtimeOnly "io.jsonwebtoken:jjwt-impl:${Versions.jsonWebToken}"
+    runtimeOnly "io.jsonwebtoken:jjwt-jackson:${Versions.jsonWebToken}"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     compileOnly "org.projectlombok:lombok:${Versions.lombok}"
     annotationProcessor "org.projectlombok:lombok:${Versions.lombok}"

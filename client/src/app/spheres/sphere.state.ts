@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { SphereModel } from "./sphere.model";
+import { AdvancedSphereColor, SphereModel } from "./sphere.model";
 
 export const SphereFeature = 'spheres;';
 
@@ -12,12 +12,9 @@ export interface SpherePageState {
     isRedOn: boolean;
     isBlueOn: boolean;
     isGreenOn: boolean;
-    redCount: number;
-    blueCount: number;
-    greenCount: number;
-    violetCount: number;
-    whiteCount: number;
+    colorCount: Record<AdvancedSphereColor, number>;
     lastRedNumber: number | undefined;
+    log: string[];
 }
 
 export const selectFeatureState = createFeatureSelector<SphereFeatureState>(SphereFeature);

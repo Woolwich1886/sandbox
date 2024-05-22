@@ -1,20 +1,35 @@
-<div class="control-block">
-    <button (click)="service.switchRed()">Запустить красные</button>
-    <button (click)="service.switchBlue()">Запустить синие</button>
-    <button (click)="service.switchGreen()">Запустить зеленые</button>
-    <button (click)="service.reset()">Сбросить</button>
+<div class="control-panel">
+    <button mat-button (click)="service.openHelp()">
+        <mat-icon svgIcon="help"></mat-icon>
+        Подсказка
+    </button>
+    <button mat-button (click)="service.reset()">
+        <mat-icon svgIcon="delete"></mat-icon>
+        Сброс
+    </button>
+    <mat-slide-toggle color="warn" [checked]="isColorOn.red | async" (toggleChange)="service.switchColor('red')">Красный
+        поток</mat-slide-toggle>
+    <mat-slide-toggle [checked]="isColorOn.blue | async" color="primary"
+        (toggleChange)="service.switchColor('blue')">Синий поток</mat-slide-toggle>
+    <mat-slide-toggle [checked]="isColorOn.green | async" color="accent"
+        (toggleChange)="service.switchColor('green')">Зеленый поток</mat-slide-toggle>
 </div>
-<div class="main-block">
-    @for (s of sphereList$ | async; track $index) {
-    <sb-sphere [color]="s.color" [number]="s.number"></sb-sphere>
-    } @empty {
-    Сферы отсутствуют...
-    }
-</div>
-<div class="result-block">
-    <p>Красные: {{redCount$ | async}}</p>
-    <p>Синие: {{blueCount$ | async}}</p>
-    <p>Зеленые: {{greenCount$ | async}}</p>
-    <p>Фиолетовые: {{violetCount$ | async}}</p>
-    <p>Белые: {{whiteCount$ | async}}</p>
+<mat-divider color="accent" vertical="true"></mat-divider>
+<div class="main-container">
+    <div class="spheres-container">
+        @for (s of sphereList$ | async; track $index) {
+        <sb-sphere [color]="s.color" [number]="s.number"></sb-sphere>
+        } @empty {
+        Сферы отсутствуют...
+        }
+    </div>
+
+    <div class="log-container">
+        @for (l of log$ | async; track $index) {
+        <p>{{l}}</p>
+        } @empty {
+        Лог пуст...
+        }
+    </div>
+    <sb-sphere-chart [data]="(colorCount$ | async)!"></sb-sphere-chart>
 </div>

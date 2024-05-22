@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { SocketMainPageComponent } from './messenger-page/messenger-page';
+import { MessengerPageComponent } from './messenger-page/messenger-page-component';
 import { MaterialModule } from '../material/material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ChatMessagesContainer } from './chat-messages-container/chat-messages-container';
+import { ChatMessagesContainerComponent } from './chat-messages-container/chat-messages-container-component';
 import { RouterModule } from '@angular/router';
 import { MessagerFeature, MessengerFeatureState } from './messenger.state';
 import { messengerReducer } from './messenger.reducer';
@@ -11,15 +11,23 @@ import { EffectsModule } from '@ngrx/effects';
 import { MessengerEffects } from './messenger.effects';
 import { ChatService } from './chat.service';
 import { CommonModule } from '@angular/common';
+import { MessengerRoutingModule } from './messenger-routing.module';
+import { ChatPreviewComponent } from './chat-preview/chat-preview.component';
+import { InputComponent } from './input/input.component';
+import { MessageComponent } from './message/message.component';
 
 
 
 @NgModule({
   declarations: [
-    SocketMainPageComponent,
-    ChatMessagesContainer,
+    MessengerPageComponent,
+    ChatMessagesContainerComponent,
+    ChatPreviewComponent,
+    InputComponent,
+    MessageComponent,
   ],
   imports: [
+    MessengerRoutingModule,
     CommonModule,
     MaterialModule,
     HttpClientModule,

@@ -1,57 +1,54 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { MessengerState, selectChatState } from "./messenger.state";
-import { Store } from "@ngrx/store";
-import { distinctUntilChanged, distinctUntilKeyChanged, filter, map, of, switchMap, take, tap, withLatestFrom } from "rxjs";
 import { routerNavigatedAction } from "@ngrx/router-store";
+import { Store } from "@ngrx/store";
+import { distinctUntilChanged, filter, map, switchMap } from "rxjs";
 import { ChatService } from "./chat.service";
-import { Message } from "./model/message.model";
-import { LoadMessage, SendMessage } from "./messenger.action";
+import { LoadMessage, SetChatList, SetCurrentUser, SetMessagesList, UpdateChatList } from "./messenger.action";
+import { MessengerState, selectCurrentUser, selectSelectedChatId } from "./messenger.state";
 
 @Injectable()
 export class MessengerEffects {
 
-    constructor(private actions$: Actions, private store: Store<MessengerState>, private service: ChatService) {
-
-    }
-
-    setCurrentUser$ = createEffect(() => this.actions$.pipe(
+    private readonly setCurrentUser$ = createEffect(() => this.actions$.pipe(
         ofType(routerNavigatedAction),
         filter(action => action.payload.event.url.match(/^\/messenger\/user\/\d+\/chat$/) != null),
-        map(info => info.payload.routerState.root.firstChild?.params['id']),
+        map(info => info.payload.routerState.root.firstChild?.firstChild?.params['id']),
         switchMap(id => this.service.getUserChatInfo(id)),
-        map(payload => ({ type: 'Set current user', payload }))
+        map(SetCurrentUser),
     ));
 
-    setChatList$ = createEffect(() => this.store.select(selectChatState).pipe(
-        map(info => info.currentUser),
+    private readonly selectedCurrentUser$ = this.store.select(selectCurrentUser).pipe(
         filter(user => !!user?.id),
-        distinctUntilChanged((a, b) => a.id === b.id),
-        switchMap(info => this.service.getChatList(info.id)),
-        map(payload => ({ type: 'Set chat list', payload }))
-    ));
+        distinctUntilChanged((a, b) => a.id === b.id)
+    );
 
-    updateChatList$ = createEffect(() => this.store.select(selectChatState).pipe(
-        map(info => info.currentUser),
-        filter(user => !!user?.id),
-        distinctUntilChanged((a, b) => a.id === b.id),
-        switchMap(info => this.service.updateChatList(info.id)),
-        map(payload => ({ type: 'Update chat list', payload }))
-    ));
-
-    setMessagesList$ = createEffect(() => this.store.select(selectChatState).pipe(
-        map(info => info.selectedChatId),
+    private readonly selectedChatId$ = this.store.select(selectSelectedChatId).pipe(
         filter(chatId => !!chatId),
         distinctUntilChanged(),
-        switchMap(id => this.service.getMessages(id!)),
-        map(payload => ({ type: 'Set messages list', payload }))
+    );
+
+    private readonly setChatList$ = createEffect(() => this.selectedCurrentUser$.pipe(
+        switchMap(info => this.service.getChatList(info.id)),
+        map(SetChatList),
     ));
 
-    loadMessage$ = createEffect(() => this.store.select(selectChatState).pipe(
-        map(info => info.selectedChatId),
-        distinctUntilChanged(),
-        switchMap(id => this.service.loadMessage(id!)),
-        map(payload => LoadMessage(payload))
+    private readonly updateChatList$ = createEffect(() => this.selectedCurrentUser$.pipe(
+        switchMap(info => this.service.updateChatList(info.id)),
+        map(UpdateChatList),
     ));
+
+    private readonly setMessagesList$ = createEffect(() => this.selectedChatId$.pipe(
+        switchMap(id => this.service.getMessages(id!)),
+        map(SetMessagesList),
+    ));
+
+    private readonly loadMessage$ = createEffect(() => this.selectedChatId$.pipe(
+        switchMap(id => this.service.loadMessage(id!)),
+        map(LoadMessage),
+    ));
+
+    constructor(private actions$: Actions, private store: Store<MessengerState>, private service: ChatService) {
+    }
 
 }

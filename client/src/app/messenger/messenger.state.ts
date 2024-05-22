@@ -18,4 +18,7 @@ export interface MessengerState {
 
 export const selectFeatureState = createFeatureSelector<MessengerFeatureState>(MessagerFeature);
 
-export const selectChatState = createSelector(selectFeatureState, (state: MessengerFeatureState) => state.messengerState);
+export const selectMessengerState = createSelector(selectFeatureState, (state: MessengerFeatureState) => state.messengerState);
+export const selectCurrentUser = createSelector(selectMessengerState, (state: MessengerState) => state.currentUser);
+export const selectChatList = createSelector(selectMessengerState, (state: MessengerState) => state.chatList);
+export const selectSelectedChatId = createSelector(selectMessengerState, (state: MessengerState) => state.selectedChatId);

@@ -13,6 +13,4 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 
     Optional<Message> findFirstByChatOrderBySendOnDesc(Chat chat);
 
-    List<Message> findAllByChatAndIsRead(Chat chat, boolean isRead);
-
 }

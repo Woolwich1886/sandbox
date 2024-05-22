@@ -3,8 +3,8 @@ package com.sandbox.server.rest.controller;
 import com.sandbox.server.rest.dto.UserDTO;
 import com.sandbox.server.service.ChatQueryService;
 import com.sandbox.server.service.UserQueryService;
-import com.sandbox.server.socket.dto.ChatPreviewInfoDTO;
-import com.sandbox.server.socket.dto.MessageDTO;
+import com.sandbox.server.rest.dto.ChatPreviewInfoDTO;
+import com.sandbox.server.rest.dto.MessageDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,6 @@ public class MessengerRestController {
 
     @GetMapping(path = "users/{id}/info")
     public ResponseEntity<UserDTO> getUserChatInfo(@PathVariable Long id) {
-        System.out.println("ID!!!= " + id);
         return new ResponseEntity<>(userQueryService.getUser(id), HttpStatus.OK);
     }
 

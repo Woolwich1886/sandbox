@@ -1,0 +1,7 @@
+{
+    "editor.codeActionsOnSave": {},
+    "javascript.format.semicolons": "insert",
+    "typescript.format.semicolons": "insert",
+    "CodeGPT.apiKey": "OpenAI",
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

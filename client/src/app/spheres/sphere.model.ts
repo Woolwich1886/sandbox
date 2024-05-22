@@ -4,4 +4,4 @@ export interface SphereModel {
 }
 
 export type SphereColor = 'red' | 'blue' | 'green';
-export type AdvancedSphereColor = SphereColor | 'white' | 'violet';
+export type AdvancedSphereColor = SphereColor | 'black' | 'violet';

@@ -6,4 +6,5 @@ public interface Versions {
     String lombok = "1.18.30";
     String postgresql = "42.6.1";
     String h2 = "2.2.224";
+    String jsonWebToken = "0.12.3";
 }

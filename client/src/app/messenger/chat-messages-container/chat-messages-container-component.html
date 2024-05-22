@@ -1,0 +1,16 @@
+<div class="chat-block">
+    <div class="user-info">{{(chatUser$ | async)?.name}}</div>
+    <div class="chat-window">
+        <div class="wrapper">
+            <div class="messages" #messagesWrapper>
+                @for (m of messages$ | async; track $index) {
+                <sb-message [ngClass]="m.isAuthor ? 'message-sender' : 'message-reciever'" [content]="m.content"
+                    [author]="m.author.name" [sendOn]="m.sendOn"></sb-message>
+                } @empty {
+                <p>Нет сообщений</p>
+                }
+            </div>
+        </div>
+        <sb-input (send)="service.sendMessage($event)"></sb-input>
+    </div>
+</div>
