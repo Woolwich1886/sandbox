@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { DeviceService } from '../../shared/device.service';
 
 @Component({
   selector: 'sb-sphere-help-dialog',
@@ -10,6 +11,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class SphereHelpDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<SphereHelpDialogComponent, void>,
+    public deviceService: DeviceService,
   ) {
   }
 

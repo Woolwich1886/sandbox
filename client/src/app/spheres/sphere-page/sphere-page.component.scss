@@ -6,55 +6,113 @@
     height: 100%;
 }
 
-.control-panel {
+@mixin container-base() {
+    border: solid _.$blue-middle 2px;
+    box-shadow: 2px 2px 4px 2px _.$blue-light;
+    border-radius: 4px;
+    overflow: overlay;
+}
+
+@mixin wrapper() {
     display: flex;
-    flex-direction: column;
+    flex: 1;
+    position: relative;
+}
+
+@mixin inner-container() {
+    display: flex;
+    position: absolute;
+    flex-wrap: wrap;
+}
+
+@mixin desktop-container() {
+    padding: 8px;
+    min-width: 300px;
+    @include container-base();
+}
+
+@mixin mobile-container() {
+    padding: 2px;
     margin: 2px;
-    min-width: 200px;
+    @include container-base();
+}
+
+.desktop-wrapper {
+    display: flex;
+    flex: 1;
+
+    .control-panel {
+        display: flex;
+        flex-direction: column;
+        margin: 2px;
+        min-width: 200px;
+    }
+
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        margin: 2px;
+
+        .info-container {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            grid-gap: 40px;
+            flex: 1;
+            margin-bottom: 40px;
+
+            .spheres-container-wrapper {
+                @include wrapper();
+                @include desktop-container();
+            }
+
+            .log-container-wrapper {
+                @include wrapper();
+                @include desktop-container();
+
+                .log-container {
+                    @include inner-container();
+
+                    p {
+                        margin: 2px;
+                    }
+                }
+            }
+        }
+
+        sb-sphere-chart {
+            @include desktop-container();
+        }
+    }
+}
+
+.mobile-wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    .control-panel {
+        display: flex;
+        margin: 2px;
+    }
+
+    .spheres-container-wrapper {
+        @include wrapper();
+        @include mobile-container();
+    }
+
+    sb-sphere-chart {
+        @include mobile-container();
+    }
+}
+
+.spheres-container {
+    @include inner-container();
+    align-content: flex-start;
 }
 
 mat-slide-toggle {
     margin: 4px;
-}
-
-@mixin container() {
-    border: solid _.$blue-middle 2px;
-    box-shadow: 2px 2px 4px 2px _.$blue-light;
-    border-radius: 4px;
-    padding: 8px;
-    min-width: 300px;
-    overflow: auto;
-    height: 375px;
-}
-
-.main-container {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 40px;
-    flex: 1;
-    margin: 2px;
-
-    .spheres-container {
-        @include container();
-        grid-column: 1;
-        grid-row: 1;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: flex-start;
-    }
-
-    .log-container {
-        @include container();
-        grid-column: 2;
-        grid-row: 1;
-    }
-
-    sb-sphere-chart {
-        @include container();
-        grid-column: 1/3;
-        grid-row: 2;
-    }
 }
 
 mat-divider {

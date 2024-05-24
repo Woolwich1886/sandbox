@@ -1,35 +1,78 @@
-<div class="control-panel">
-    <button mat-button (click)="service.openHelp()">
-        <mat-icon svgIcon="help"></mat-icon>
-        Подсказка
-    </button>
-    <button mat-button (click)="service.reset()">
-        <mat-icon svgIcon="delete"></mat-icon>
-        Сброс
-    </button>
-    <mat-slide-toggle color="warn" [checked]="isColorOn.red | async" (toggleChange)="service.switchColor('red')">Красный
-        поток</mat-slide-toggle>
-    <mat-slide-toggle [checked]="isColorOn.blue | async" color="primary"
-        (toggleChange)="service.switchColor('blue')">Синий поток</mat-slide-toggle>
-    <mat-slide-toggle [checked]="isColorOn.green | async" color="accent"
-        (toggleChange)="service.switchColor('green')">Зеленый поток</mat-slide-toggle>
-</div>
-<mat-divider color="accent" vertical="true"></mat-divider>
-<div class="main-container">
-    <div class="spheres-container">
-        @for (s of sphereList$ | async; track $index) {
-        <sb-sphere [color]="s.color" [number]="s.number"></sb-sphere>
-        } @empty {
-        Сферы отсутствуют...
-        }
+@if (deviceService.isDeviceDesktop()) {
+<div class="desktop-wrapper">
+    <div class="control-panel">
+        <button mat-button (click)="service.openHelp()">
+            <mat-icon svgIcon="help"></mat-icon>
+            Подсказка
+        </button>
+        <button mat-button (click)="service.reset()">
+            <mat-icon svgIcon="delete"></mat-icon>
+            Сброс
+        </button>
+        <mat-slide-toggle color="warn" [checked]="isColorOn.red | async"
+            (toggleChange)="service.switchColor('red')">Красный
+            поток</mat-slide-toggle>
+        <mat-slide-toggle [checked]="isColorOn.blue | async" color="primary"
+            (toggleChange)="service.switchColor('blue')">Синий поток</mat-slide-toggle>
+        <mat-slide-toggle [checked]="isColorOn.green | async" color="accent"
+            (toggleChange)="service.switchColor('green')">Зеленый поток</mat-slide-toggle>
     </div>
-
-    <div class="log-container">
-        @for (l of log$ | async; track $index) {
-        <p>{{l}}</p>
-        } @empty {
-        Лог пуст...
-        }
+    <mat-divider color="accent" vertical="true"></mat-divider>
+    <div class="main-container">
+        <div class="info-container">
+            <div class="spheres-container-wrapper">
+                <div class="spheres-container">
+                    @for (s of sphereList$ | async; track $index) {
+                    <sb-sphere [color]="s.color" [number]="s.number"></sb-sphere>
+                    } @empty {
+                    Сферы отсутствуют...
+                    }
+                </div>
+            </div>
+            <div class="log-container-wrapper">
+                <div class="log-container">
+                    @for (l of log$ | async; track $index) {
+                    <p>{{l}}</p>
+                    } @empty {
+                    Лог пуст...
+                    }
+                </div>
+            </div>
+        </div>
+        <sb-sphere-chart [data]="(colorCount$ | async)!"></sb-sphere-chart>
+    </div>
+</div>
+} @else {
+<div class="mobile-wrapper">
+    <div class="control-panel">
+        <button mat-icon-button (click)="service.openHelp()">
+            <mat-icon svgIcon="help"></mat-icon>
+        </button>
+        <button mat-icon-button (click)="service.reset()">
+            <mat-icon svgIcon="delete"></mat-icon>
+        </button>
+        <mat-slide-toggle [checked]="isColorOn.red | async" color="warn" (toggleChange)="service.switchColor('red')">
+            <sb-sphere color="red"></sb-sphere>
+        </mat-slide-toggle>
+        <mat-slide-toggle [checked]="isColorOn.blue | async" color="primary"
+            (toggleChange)="service.switchColor('blue')">
+            <sb-sphere color="blue"></sb-sphere>
+        </mat-slide-toggle>
+        <mat-slide-toggle [checked]="isColorOn.green | async" color="accent"
+            (toggleChange)="service.switchColor('green')">
+            <sb-sphere color="green"></sb-sphere>
+        </mat-slide-toggle>
+    </div>
+    <mat-divider color="accent"></mat-divider>
+    <div class="spheres-container-wrapper">
+        <div class="spheres-container">
+            @for (s of sphereList$ | async; track $index) {
+            <sb-sphere [color]="s.color" [number]="s.number"></sb-sphere>
+            } @empty {
+            Сферы отсутствуют...
+            }
+        </div>
     </div>
     <sb-sphere-chart [data]="(colorCount$ | async)!"></sb-sphere-chart>
 </div>
+}

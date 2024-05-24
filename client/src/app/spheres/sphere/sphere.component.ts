@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { DeviceService } from '../../shared/device.service';
+import { AdvancedSphereColor } from '../sphere.model';
 
 @Component({
   selector: 'sb-sphere',
@@ -9,12 +11,15 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 export class SphereComponent implements OnInit {
 
   @Input()
-  color?: string;
+  color?: AdvancedSphereColor;
 
   @Input()
   number?: number;
 
   backgroundStyle?: Record<string, string>;
+
+  constructor(public deviceService: DeviceService) {
+  }
 
   ngOnInit(): void {
     this.backgroundStyle = {

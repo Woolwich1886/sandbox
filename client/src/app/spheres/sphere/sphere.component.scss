@@ -7,9 +7,18 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+}
+
+.desktop {
     height: 64px;
     width: 64px;
     margin: 8px;
+}
+
+.mobile {
+    height: 32px;
+    width: 32px;
+    margin: 4px;
 }
 
 @keyframes creation {

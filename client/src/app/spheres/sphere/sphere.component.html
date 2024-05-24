@@ -1,1 +1,2 @@
-<div class="sphere" [ngStyle]="backgroundStyle">{{number}}</div>
+<div class="sphere" [ngStyle]="backgroundStyle" [ngClass]="deviceService.isDeviceDesktop() ? 'desktop' : 'mobile'">
+    {{number}}</div>

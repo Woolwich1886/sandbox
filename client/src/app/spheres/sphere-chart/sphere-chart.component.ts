@@ -3,6 +3,7 @@ import { EChartsOption } from 'echarts';
 import { AdvancedSphereColor } from '../sphere.model';
 import { NgChanges } from '../../utils/type-utils';
 import { localizedColors } from '../sphere-page.service';
+import { DeviceService } from '../../shared/device.service';
 
 @Component({
   selector: 'sb-sphere-chart',
@@ -14,10 +15,11 @@ export class SphereChartComponent implements OnChanges {
 
   @Input()
   data!: Record<AdvancedSphereColor, number>;
+  private readonly isMobile: boolean;
 
   options!: EChartsOption;
-  constructor() {
-
+  constructor(private deviceService: DeviceService) {
+    this.isMobile = deviceService.isDeviceMobile();
   }
 
   ngOnChanges(changes: NgChanges<SphereChartComponent>): void {
@@ -40,6 +42,14 @@ export class SphereChartComponent implements OnChanges {
         silent: false,
         splitLine: {
           show: false,
+        },
+        axisLabel: {
+          rotate: this.isMobile ? 30 : 0,
+          interval: this.isMobile ? 0 : 'auto',
+          hideOverlap: false,
+        },
+        axisTick: {
+          interval: this.isMobile ? 0 : 'auto',
         },
       },
       yAxis: {},

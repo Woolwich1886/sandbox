@@ -1,6 +1,9 @@
 .dialog {
     margin: 8px;
-    width: 800px;
+}
+
+.dialog-content {
+    overflow: overlay;
 }
 
 .dialog-button {
