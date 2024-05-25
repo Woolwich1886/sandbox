@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   selector: 'sb-message',
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageComponent {
 

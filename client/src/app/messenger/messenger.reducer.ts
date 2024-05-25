@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { Action } from "../utils/type-utils";
-import { LoadMessage, MessengerActionType, SelectChat, SetChatList, SetCurrentUser, SetMessagesList, UpdateChatList } from "./messenger.action";
+import { DeselectChat, LoadMessage, MessengerActionType, SelectChat, SetChatList, SetCurrentUser, SetMessagesList, UpdateChatList } from "./messenger.action";
 import { MessengerState } from "./messenger.state";
 import { ChatPreviewInfo } from "./model/chat-preview-info.model";
 import { Message } from "./model/message.model";
@@ -20,11 +20,13 @@ export const messengerReducer = createReducer(
     on(SetChatList, setChatList),
     on(SelectChat, selectChat),
     on(UpdateChatList, updateChatList),
-    on(SetMessagesList, setMessagesList)
+    on(SetMessagesList, setMessagesList),
+    on(DeselectChat, deselectChat),
 );
 
 function setCurrentUser(state: MessengerState, action: Action<MessengerActionType.SetCurrentUser, UserInfo>): MessengerState {
-    return { ...state, currentUser: action.payload, selectedChatId: undefined };
+    const list = state.chatList.map(info => ({ ...info, isActive: false }));
+    return { ...state, currentUser: action.payload, selectedChatId: undefined, chatList: list };
 }
 
 function setChatList(state: MessengerState, action: Action<MessengerActionType.SetChatList, ChatPreviewInfo[]>): MessengerState {
@@ -51,4 +53,9 @@ function updateChatList(state: MessengerState, action: Action<MessengerActionTyp
     const chat: ChatPreviewInfo = { ...action.payload, isActive: state.selectedChatId === action.payload.id };
     newList.unshift(chat);
     return { ...state, chatList: newList };
+}
+
+function deselectChat(state: MessengerState): MessengerState {
+    const list = state.chatList.map(info => ({ ...info, isActive: false }));
+    return { ...state, chatList: list, selectedChatId: undefined };
 }

@@ -1,8 +1,15 @@
-<div class="chat-block">
-    <div class="user-info">{{(chatUser$ | async)?.name}}</div>
+<div class="chat-container">
+    <div class="user-info-wrapper">
+        @if (deviceService.isDeviceMobile()) {
+        <button mat-icon-button (click)="service.clearSelectedChat()">
+            <mat-icon svgIcon="back" color="accent"></mat-icon>
+        </button>
+        }
+        <div class="user-info">{{(chatUser$ | async)?.name}}</div>
+    </div>
     <div class="chat-window">
-        <div class="wrapper">
-            <div class="messages" #messagesWrapper>
+        <div class="messages-container-wrapper">
+            <div class="messages-container" #messagesContainer>
                 @for (m of messages$ | async; track $index) {
                 <sb-message [ngClass]="m.isAuthor ? 'message-sender' : 'message-reciever'" [content]="m.content"
                     [author]="m.author.name" [sendOn]="m.sendOn"></sb-message>

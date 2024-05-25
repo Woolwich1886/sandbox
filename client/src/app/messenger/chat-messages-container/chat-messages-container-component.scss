@@ -1,20 +1,17 @@
+@use '../../../assets/scss/palette.scss' as _;
+
 :host {
     display: flex;
     height: 100%;
 }
 
-.main-block {
+.user-info-wrapper {
     display: flex;
-    flex-direction: column;
-    flex: 1;
-    flex-wrap: nowrap;
+    align-items: center;
+    border-bottom: 2px solid _.$mint-dark;
 }
 
-.user-info {
-    border-bottom: 2px solid black;
-}
-
-.chat-block {
+.chat-container {
     display: flex;
     flex: 4;
     flex-direction: column;
@@ -26,7 +23,7 @@
     flex-direction: column;
 }
 
-.wrapper {
+.messages-container-wrapper {
     display: flex;
     flex: 1;
     position: relative;
@@ -34,15 +31,7 @@
     justify-content: center;
 }
 
-.empty-chat {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 1;
-    justify-content: center;
-    align-content: center;
-}
-
-.messages {
+.messages-container {
     display: flex;
     position: absolute;
     align-items: center;
@@ -55,15 +44,16 @@ sb-input {
     justify-content: center;
 }
 
-.message-sender {
+sb-message.message-sender {
     align-self: flex-end;
+
+    ::ng-deep {
+        mat-card {
+            background-color: _.$mint-light;
+        }
+    }
 }
 
-.message-reciever {
+sb-message.message-reciever {
     align-self: flex-start;
-}
-
-mat-divider {
-    border: solid 2px green;
-    color: green($color: #13bb38);
 }

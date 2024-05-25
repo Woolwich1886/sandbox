@@ -1,18 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, firstValueFrom, map } from 'rxjs';
 import { ChatService } from './chat.service';
-import { SelectChat } from './messenger.action';
+import { DeselectChat, SelectChat } from './messenger.action';
 import { MessengerState, selectChatList, selectCurrentUser, selectMessengerState } from './messenger.state';
 import { ChatPreviewInfo } from './model/chat-preview-info.model';
 import { Message } from './model/message.model';
 import { UserInfo } from './model/user-info.model';
 
 @Injectable()
-export class MessengerPageService {
+export class MessengerPageService implements OnDestroy {
 
   constructor(private store: Store<MessengerState>, private router: Router, private route: ActivatedRoute, private service: ChatService) {
+    this.service.activate();
+  }
+
+  ngOnDestroy(): void {
+    this.service.deactivate();
   }
 
   getUserChatList(): Observable<ChatPreviewInfo[]> {
@@ -42,5 +47,9 @@ export class MessengerPageService {
   sendMessage(content: string): void {
     firstValueFrom(this.store.select(selectMessengerState))
       .then(info => this.service.sendMessage({ author: info.currentUser, content } satisfies Message, info.selectedChatId!));
+  }
+
+  clearSelectedChat(): void {
+    this.store.dispatch(DeselectChat());
   }
 }

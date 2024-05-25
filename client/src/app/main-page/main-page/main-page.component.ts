@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MainPageService } from '../main-page.service';
-import { NavCard } from '../nav-card.model';
+import { NavCard } from '../../shared/model/nav-card.model';
 
 @Component({
   selector: 'sb-main-page',

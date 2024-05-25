@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { NavCard } from './nav-card.model';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
@@ -7,6 +6,7 @@ import { SERVER } from '../app.config';
 import { UserInfo } from '../messenger/model/user-info.model';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { UserSelectionDialogComponent } from '../shared/user-selection-dialog/user-selection-dialog.component';
+import { NavCard } from '../shared/model/nav-card.model';
 
 @Injectable({ providedIn: 'root' })
 export class MainPageService {

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 import { EChartsOption } from 'echarts';
-import { AdvancedSphereColor } from '../sphere.model';
+import { AdvancedSphereColor } from '../model/sphere.model';
 import { NgChanges } from '../../utils/type-utils';
 import { localizedColors } from '../sphere-page.service';
 import { DeviceService } from '../../shared/device.service';

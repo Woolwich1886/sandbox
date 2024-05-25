@@ -2,7 +2,7 @@ import { createReducer, on } from "@ngrx/store";
 import { Action } from "../utils/type-utils";
 import { createSphere, localizedColors } from "./sphere-page.service";
 import { AddSphere, Reset, SphereActionType, SwitchColor } from "./sphere.action";
-import { SphereColor, SphereModel } from "./sphere.model";
+import { SphereColor, SphereModel } from "./model/sphere.model";
 import { SpherePageState } from "./sphere.state";
 
 export const initialState: SpherePageState = {

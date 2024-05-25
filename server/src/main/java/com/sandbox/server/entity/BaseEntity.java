@@ -10,6 +10,9 @@ import lombok.Getter;
 @MappedSuperclass
 public abstract class BaseEntity {
 
+    /**
+     * Идентификатор
+     */
     @Id
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)

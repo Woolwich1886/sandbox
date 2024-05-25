@@ -11,6 +11,7 @@ export enum MessengerActionType {
     SetChatList = '[Messenger Page] Set chat list',
     SelectChat = '[Messenger Page] Select chat',
     UpdateChatList = '[Messenger Page] Update chat list',
+    DeselectChat = '[Messenger Page] Deselect Chat',
 }
 
 export const SetCurrentUser = createAction(MessengerActionType.SetCurrentUser, (payload: UserInfo) => ({ payload }));
@@ -20,4 +21,5 @@ export const SetMessagesList = createAction(MessengerActionType.SetMessagesList,
 export const SetChatList = createAction(MessengerActionType.SetChatList, (payload: ChatPreviewInfo[]) => ({ payload }));
 export const SelectChat = createAction(MessengerActionType.SelectChat, (payload: number) => ({ payload }));
 export const UpdateChatList = createAction(MessengerActionType.UpdateChatList, (payload: ChatPreviewInfo) => ({ payload }));
+export const DeselectChat = createAction(MessengerActionType.DeselectChat);
 

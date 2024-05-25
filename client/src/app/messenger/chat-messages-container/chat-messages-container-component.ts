@@ -1,8 +1,9 @@
 import { AfterViewChecked, ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
-import { Observable, map, tap, withLatestFrom } from 'rxjs';
+import { Observable, map, withLatestFrom } from 'rxjs';
 import { MessengerPageService } from '../messenger-page.service';
 import { Message } from '../model/message.model';
 import { UserInfo } from '../model/user-info.model';
+import { DeviceService } from '../../shared/device.service';
 
 interface AuthorsMessage extends Message {
   isAuthor: boolean;
@@ -16,25 +17,24 @@ interface AuthorsMessage extends Message {
 })
 export class ChatMessagesContainerComponent implements AfterViewChecked {
 
-  @ViewChild('messagesWrapper', { static: false })
-  messagesBlock?: ElementRef;
+  @ViewChild('messagesContainer', { static: false })
+  messagesContainer?: ElementRef;
 
   currentUser$: Observable<UserInfo>;
   messages$: Observable<AuthorsMessage[]>;
   chatUser$: Observable<UserInfo | undefined>;
 
-  constructor(public service: MessengerPageService) {
+  constructor(public service: MessengerPageService, public deviceService: DeviceService) {
     this.currentUser$ = service.getCurrentUser();
     this.messages$ = service.getMessages().pipe(
       withLatestFrom(this.currentUser$),
       map(([messages, info]) => messages.map(message => modifyMessage(message, info.id)))
     );
-    this.chatUser$ = service.getChatUser().pipe(tap(console.log));
+    this.chatUser$ = service.getChatUser();
   }
 
   ngAfterViewChecked(): void {
-    //console.log(this.messagesBlock);
-    const div: HTMLDivElement = this.messagesBlock?.nativeElement;
+    const div: HTMLDivElement = this.messagesContainer?.nativeElement;
     div?.parentElement?.scrollTo({ top: div.offsetHeight });
   }
 }

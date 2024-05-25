@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SpherePageService } from '../sphere-page.service';
-import { AdvancedSphereColor, SphereColor, SphereModel } from '../sphere.model';
+import { AdvancedSphereColor, SphereColor, SphereModel } from '../model/sphere.model';
 import { DeviceService } from '../../shared/device.service';
 
 @Component({

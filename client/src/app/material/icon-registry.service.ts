@@ -14,5 +14,6 @@ export class IconRegistyService {
         iconRegistry.addSvgIcon('help', domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/help.svg'));
         iconRegistry.addSvgIcon('delete', domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/delete.svg'));
         iconRegistry.addSvgIcon('send', domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/send.svg'));
+        iconRegistry.addSvgIcon('back', domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/back.svg'));
     }
 }

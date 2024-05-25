@@ -18,8 +18,15 @@ export class ChatService implements OnDestroy {
     config.debug = console.log;
     this.stomp = new RxStomp();
     this.stomp.configure(config);
+  }
+
+  activate(): void {
     this.stomp.activate();
-    console.log('alive!');
+
+  }
+
+  deactivate(): void {
+    this.stomp.deactivate();
   }
 
   ngOnDestroy(): void {
@@ -35,7 +42,6 @@ export class ChatService implements OnDestroy {
   }
 
   getMessages(id: number): Observable<Message[]> {
-    console.log('getMessages');
     return this.http.request<Message[]>('GET', SERVER + `/rest/chat/${id}/messages`);
   }
 

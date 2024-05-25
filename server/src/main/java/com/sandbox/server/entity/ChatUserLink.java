@@ -12,12 +12,18 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "chat_user_link")
-public class ChatUserLink extends BaseEntity{
+public class ChatUserLink extends BaseEntity {
 
+    /**
+     * Пользователь
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "app_user_id", nullable = false)
     private User user;
 
+    /**
+     * Чат
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chat_id", nullable = false)
     private Chat chat;

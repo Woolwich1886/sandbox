@@ -5,62 +5,40 @@
     height: 100%;
 }
 
-.main-block {
+.main-container {
     display: flex;
     flex-direction: column;
     width: 200px;
     flex-wrap: nowrap;
 }
 
+.mobile-main-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex: 1;
+}
+
 .user-info {
     border-bottom: 2px solid _.$mint-dark;
 }
 
-.chat-list {
+.chat-list-container {
     display: flex;
     flex-direction: column;
-    width: 200px;
 }
 
-.chat-block {
+.chat-container {
     display: flex;
     flex: 1;
     flex-direction: column;
 }
 
-.chat-window {
+.empty-chat-container {
     display: flex;
     flex: 1;
-    flex-direction: column;
-}
-
-.empty-chat {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 1;
-    justify-content: center;
-    align-content: center;
-}
-
-.messages {
-    display: flex;
-    position: absolute;
     align-items: center;
-    flex-direction: column;
-    width: 100%;
-}
-
-sb-input {
-    display: flex;
     justify-content: center;
-}
-
-.message-sender {
-    align-self: flex-end;
-}
-
-.message-reciever {
-    align-self: flex-start;
 }
 
 mat-divider {

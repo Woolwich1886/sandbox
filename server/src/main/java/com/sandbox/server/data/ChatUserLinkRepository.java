@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ChatUserLinkRepository extends JpaRepository<ChatUserLink, Long>, JpaSpecificationExecutor<ChatUserLink> {
 
-    List<ChatUserLink> findAllByChatId(Long id);;
+    List<ChatUserLink> findAllByChatId(Long id);
 
 }

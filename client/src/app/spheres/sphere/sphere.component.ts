@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { DeviceService } from '../../shared/device.service';
-import { AdvancedSphereColor } from '../sphere.model';
+import { AdvancedSphereColor } from '../model/sphere.model';
 
 @Component({
   selector: 'sb-sphere',

@@ -17,7 +17,7 @@ import {
 } from 'rxjs';
 import { SphereHelpDialogComponent } from './sphere-help-dialog/sphere-help-dialog.component';
 import { AddSphere, Reset, SwitchColor } from './sphere.action';
-import { AdvancedSphereColor, SphereColor, SphereModel } from './sphere.model';
+import { AdvancedSphereColor, SphereColor, SphereModel } from './model/sphere.model';
 import { SphereFeatureState, SpherePageState, selectPageState } from './sphere.state';
 
 const colorMap: Record<SphereColor, 'isRedOn' | 'isBlueOn' | 'isGreenOn'> = {
@@ -42,6 +42,7 @@ export class SpherePageService implements OnDestroy {
 
   ngOnDestroy(): void {
     this.flowSub.unsubscribe();
+    this.reset();
   }
 
   getSpheres(): Observable<SphereModel[]> {

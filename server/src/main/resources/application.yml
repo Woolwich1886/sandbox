@@ -9,13 +9,3 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     generate-ddl: true
-      #show-sql: true
-      #properties:
-      # hibernate:
-    # format_sql: true
-  security:
-    ## 256 bit строка для токена
-    appSecret: JNbiCvuU1G1ZNYjhIY1NGHPJxsvRGucH
-    token:
-      accessTime: 36000
-      refreshTime: 360000

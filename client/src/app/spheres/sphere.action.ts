@@ -1,5 +1,5 @@
 import { createAction } from "@ngrx/store";
-import { SphereColor, SphereModel } from "./sphere.model";
+import { SphereColor, SphereModel } from "./model/sphere.model";
 
 export enum SphereActionType {
     SwitchColor = '[Sphere Page] Switch Color',

@@ -1,20 +1,33 @@
-<div class="main-block">
-    <div class="user-info">{{(currentUser$ | async )?.name}}</div>
-    <div class="chat-list">
-        @for (c of chatList$ | async ; track $index) {
-        <sb-chat-preview [lastMessage]="c.lastMessage" [user]="c.user" [isActive]="c.isActive"
-            (choose)="service.selectChat(c.id)"></sb-chat-preview>
-        } @empty {
-        Отсутвуют чаты
-        }
-    </div>
+@if (deviceService.isDeviceDesktop()) {
+<div class="main-container">
+  <ng-container *ngTemplateOutlet="userInfoAndchatList"></ng-container>
 </div>
 <mat-divider vertical="true"></mat-divider>
-<div class="chat-block">
-    @if (isChatSelected$ | async) {
-    <sb-chat-messages-container></sb-chat-messages-container>
-    }
-    @else {
-    Не выбран диалог
-    }
+@if (isChatSelected$ | async) {
+<div class="chat-container">
+  <sb-chat-messages-container></sb-chat-messages-container>
 </div>
+} @else {
+<div class="empty-chat-container">Не выбран диалог</div>
+}
+} @else {
+<div class="mobile-main-container">
+  @if (isChatSelected$ | async) {
+  <div class="chat-container">
+    <sb-chat-messages-container></sb-chat-messages-container>
+  </div>
+  } @else {
+  <ng-container *ngTemplateOutlet="userInfoAndchatList"></ng-container>
+  }
+</div>
+}
+
+<ng-template #userInfoAndchatList let-info>
+  <div class="user-info">{{(currentUser$ | async )?.name}}</div>
+  <div class="chat-list-container">
+    @for (c of chatList$ | async ; track $index) {
+    <sb-chat-preview [lastMessage]="c.lastMessage" [user]="c.user" [isActive]="c.isActive"
+      (choose)="service.selectChat(c.id)"></sb-chat-preview>
+    }
+  </div>
+</ng-template>

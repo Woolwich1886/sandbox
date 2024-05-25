@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { AdvancedSphereColor, SphereModel } from "./sphere.model";
+import { AdvancedSphereColor, SphereModel } from "./model/sphere.model";
 
 export const SphereFeature = 'spheres;';
 

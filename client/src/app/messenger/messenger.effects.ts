@@ -20,7 +20,7 @@ export class MessengerEffects {
 
     private readonly selectedCurrentUser$ = this.store.select(selectCurrentUser).pipe(
         filter(user => !!user?.id),
-        distinctUntilChanged((a, b) => a.id === b.id)
+        distinctUntilChanged((a, b) => a.id === b.id),
     );
 
     private readonly selectedChatId$ = this.store.select(selectSelectedChatId).pipe(

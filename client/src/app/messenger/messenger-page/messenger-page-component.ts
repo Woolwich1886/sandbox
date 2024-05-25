@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { MessengerPageService } from '../messenger-page.service';
 import { ChatPreviewInfo } from '../model/chat-preview-info.model';
 import { UserInfo } from '../model/user-info.model';
+import { DeviceService } from '../../shared/device.service';
 
 @Component({
   selector: 'sb-messenger-page',
@@ -17,7 +18,7 @@ export class MessengerPageComponent {
   readonly currentUser$: Observable<UserInfo>;
   readonly isChatSelected$: Observable<boolean>;
 
-  constructor(public service: MessengerPageService) {
+  constructor(public service: MessengerPageService, public deviceService: DeviceService) {
     this.chatList$ = service.getUserChatList();
     this.currentUser$ = service.getCurrentUser();
     this.isChatSelected$ = service.isChatSelected();
