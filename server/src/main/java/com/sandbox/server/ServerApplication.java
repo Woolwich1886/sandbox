@@ -46,7 +46,7 @@ public class ServerApplication {
         createUserDialogLink(lebowski, chatTonylebowski);
         createUserDialogLink(tony, chatTonylebowski);
 
-        createMessage(chatBojackTony, bojack, "Привет, Тони, утки уже улетели?");
+        createMessage(chatBojackTony, bojack, "Привет, Тони, как дела?");
         createMessage(chatTonylebowski, tony, "Где деньги, Лебовски?");
     }
 
