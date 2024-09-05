@@ -1,0 +1,10 @@
+version: '3'
+services:
+  client:
+    image: woolwich1886/sandboxclient:latest
+    ports:
+      - 4200:4200
+  server:
+    image: woolwich1886/sandboxserver:latest
+    ports:
+      - 8080:8080

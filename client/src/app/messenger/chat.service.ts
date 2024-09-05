@@ -15,14 +15,12 @@ export class ChatService implements OnDestroy {
   constructor(private http: HttpClient) {
     const config = new RxStompConfig();
     config.brokerURL = SERVERWS;
-    config.debug = console.log;
     this.stomp = new RxStomp();
     this.stomp.configure(config);
   }
 
   activate(): void {
     this.stomp.activate();
-
   }
 
   deactivate(): void {
